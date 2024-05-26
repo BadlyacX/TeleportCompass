@@ -7,12 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Arrays;
-import java.util.List;
 
 public class AddLocationCommand implements CommandExecutor {
     private final JavaPlugin plugin;
-    private final List<String> validMaterials = Arrays.asList("STONE", "STICK", "END_STONE", "GRASS", "GUNPOWDER", "SLIME_BLOCK", "ENDER_PEARL");
 
     public AddLocationCommand(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -21,18 +18,13 @@ public class AddLocationCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length != 5) {
-            sender.sendMessage(ChatColor.YELLOW + "Usage: /addLocation <Location name> <icon_item: STONE / STICK / END_STONE / GRASS / GUNPOWDER / SLIME_BLOCK / ENDER_PEARL> <Location X> <Location Y> <Location Z>");
+            sender.sendMessage(ChatColor.YELLOW + "Usage: /addLocation <Location name> <icon_item: (ex: GRASS_BLOCK)> <Location X> <Location Y> <Location Z>");
             return true;
         }
 
         String locationName = args[0];
         String materialName = args[1].toUpperCase();
-
-        if (!validMaterials.contains(materialName)) {
-            sender.sendMessage(ChatColor.RED + "Invalid icon item. Please use one of the following: STONE, STICK, END_STONE, GRASS, GUNPOWDER, SLIME_BLOCK, ENDER_PEARL");
-            return true;
-        }
-
+        
         int locX, locY, locZ;
         try {
             locX = Integer.parseInt(args[2]);
