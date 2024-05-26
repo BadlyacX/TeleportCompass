@@ -2,8 +2,8 @@ package com.badlyac.Util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -15,7 +15,6 @@ import java.util.List;
 
 public class GuiCreator {
     private JavaPlugin plugin;
-    private Material material;
 
     public GuiCreator(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -29,18 +28,18 @@ public class GuiCreator {
         if (locations != null) {
             for (String key : locations.getKeys(false)) {
                 String materialName = locations.getString(key + ".Material");
-                if (materialName != null) {
-                    material = Material.matchMaterial(materialName);
-                }
+                Material material = Material.matchMaterial(materialName);
                 int x = locations.getInt(key + ".x");
                 int y = locations.getInt(key + ".y");
                 int z = locations.getInt(key + ".z");
+                String worldType = locations.getString(key + ".worldType");
 
                 ItemStack item = new ItemStack(material != null ? material : Material.BARRIER);
                 ItemMeta meta = item.getItemMeta();
                 if (meta != null) {
                     meta.setDisplayName(key);
                     List<String> lore = new ArrayList<>();
+                    lore.add("World: " + worldType);
                     lore.add("X: " + x + ", Y: " + y + ", Z: " + z);
                     meta.setLore(lore);
                     item.setItemMeta(meta);

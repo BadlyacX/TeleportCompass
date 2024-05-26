@@ -11,7 +11,7 @@ public class TeleportCompassMain extends JavaPlugin {
     public void onEnable() {
         instance = this;
         this.getCommand("addLocation").setExecutor(new AddLocationCommand(this));
-        getServer().getPluginManager().registerEvents(new GuiClickListener(), this);
+        getServer().getPluginManager().registerEvents(new GuiClickListener(instance), this);
         getServer().getPluginManager().registerEvents(new CompassListener(),this);
         this.saveDefaultConfig();
     }
