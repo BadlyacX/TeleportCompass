@@ -6,3 +6,6 @@ commands:
   addLocation:
     usage: /addLocation <Location name> <Location X> <Location Y> <Location Z>
     description: Saves a location to the config
+  removeLocation:
+    usage: /removeLocation <Location name>
+    description: Removes a location from the config
